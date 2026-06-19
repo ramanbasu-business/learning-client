@@ -1,4 +1,4 @@
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY learning-client/ .
 RUN npm run build
 
 # Serve stage
-FROM node:20-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 
