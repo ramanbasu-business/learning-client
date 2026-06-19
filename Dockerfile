@@ -2,10 +2,10 @@ FROM node:24-alpine AS builder
 
 WORKDIR /app
 
-COPY learning-client/package*.json ./
+COPY package*.json ./
 RUN npm install
 
-COPY learning-client/ .
+COPY . .
 
 RUN npm run build
 

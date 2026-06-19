@@ -27,9 +27,10 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm exec vite build
