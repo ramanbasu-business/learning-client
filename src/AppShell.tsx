@@ -37,13 +37,9 @@ export default function AppShell({ children }: { children?: React.ReactNode }) {
                             <span className="hidden rounded-full bg-[#4f46e5] px-3 py-1 text-xs font-semibold text-white sm:inline-flex">
                                 {profile.roleName || 'Patient'}
                             </span>
-                            <button
-                                className="rounded-md border border-white/10 bg-[#111a31] px-3 py-2 text-sm font-semibold text-slate-100 shadow-sm transition hover:bg-[#16213d]"
-                                onClick={() => console.log('Logout')}
-                                type="button"
-                            >
-                                Logout
-                            </button>
+                            <a href='/logoff' className="rounded-md border border-white/10 bg-[#111a31] px-3 py-2 text-sm font-semibold text-slate-100 shadow-sm transition hover:bg-[#16213d]">
+                                Log off</a>
+                            
                         </div>
                     </div>
                 </header>

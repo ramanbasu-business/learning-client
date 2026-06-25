@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
 const navItems = [
-    { name: 'Dashboard', href: '/' },
+    { name: 'Dashboard', href: '/dashboard' },
     { name: 'Cart', href: '/cartpage' },
     { name: 'Orders', href: '/orders' },
     { name: 'Messages', href: '/messages' },
@@ -10,6 +10,8 @@ const navItems = [
     { name: 'TestListGroup Event', href: '/TestListGroup' },
     { name: 'TestAlert Event', href: '/TestAlert' },
     { name: 'TestButton Event', href: '/TestButton' },
+
+    { name: 'Logoff', href: '/logoff' },
 ];
 
 export default function Sidebar() {

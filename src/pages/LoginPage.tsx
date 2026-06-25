@@ -11,14 +11,14 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const handleSubmit = (event: SubmitEvent) => {
+    const handleSubmit = async (event: SubmitEvent) => {
         event.preventDefault();
 
-        if (login(username, password)) {
-            const redirectTo = (location.state as { from?: Location })?.from?.pathname ?? '/';
+        if (await login(username, password)) {
+            const redirectTo = (location.state as { from?: Location })?.from?.pathname ?? '/dashboard';
             navigate(redirectTo, { replace: true });
         } else {
-            setError('Invalid username or password');
+            setError('Invalid login');
         }
     };
 
