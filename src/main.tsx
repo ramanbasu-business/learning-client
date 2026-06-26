@@ -39,9 +39,9 @@ createRoot(document.getElementById('root')!).render(
               <Route path="/cartpage" element={<CartPage />} />
 
               {/* Test/demo routes */}
-              <Route path="/TestListGroup" element={<TestListGroup />} />
-              <Route path="/TestAlert" element={<TestAlert />} />
-              <Route path="/TestButton" element={<TestButton />} />
+              <Route path="/testlistgroup" element={<TestListGroup />} />
+              <Route path="/testalert" element={<TestAlert />} />
+              <Route path="/testbutton" element={<TestButton />} />
             </Route>
           </Route>
 

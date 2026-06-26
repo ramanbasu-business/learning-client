@@ -18,7 +18,12 @@ export default function Sidebar() {
     return (
         <aside className="hidden h-screen w-72 shrink-0 border-r border-white/10 bg-[#0d1426] px-4 py-4 lg:block">
             <div className="mb-8">
-                <p className="text-lg font-semibold text-white">My App</p>
+                <p className="text-lg font-semibold text-white">My App - 
+
+                    <a href='/' className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-400">
+                        Home</a>
+                </p>
+                
                 <p className="mt-1 text-xs font-medium uppercase tracking-[0.2em] text-slate-400">
                     Learning Application
                 </p>

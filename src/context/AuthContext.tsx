@@ -1,35 +1,59 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
+export interface AuthUser {
+    id: string;
+    username: string;
+    email: string;
+    name: string;
+    roles?: string[];
+}
+
+interface LoginResponse {
+    status: boolean;
+    message: string;
+    user: AuthUser;
+}
+
 interface AuthContextValue {
     isAuthenticated: boolean;
-    username: string | null;
+    user: AuthUser | null;
     login: (username: string, password: string) => Promise<boolean>;
     logout: () => void;
 }
 
-const STORAGE_KEY = 'auth_username';
+const STORAGE_KEY = 'auth_user';
+const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5001';
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
+function readStoredUser(): AuthUser | null {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+
+    try {
+        return JSON.parse(raw) as AuthUser;
+    } catch {
+        return null;
+    }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
-    const [username, setUsername] = useState<string | null>(() => localStorage.getItem(STORAGE_KEY));
+    const [user, setUser] = useState<AuthUser | null>(readStoredUser);
 
     const login = async (username: string, password: string) => {
         try {
-            // authenticate the user
-            const response = await fetch('http://localhost:5000/api/users/auth', {
+            const response = await fetch(`${API_URL}/api/users/auth`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: username, password: password })
+                body: JSON.stringify({ username, password })
             });
 
-            console.log('Login response:', response.status, response.statusText);
             const data = await response.json();
-            console.log('Login response data:', data);
 
-            if (response.ok) {
-                localStorage.setItem(STORAGE_KEY, username);
-                setUsername(username);
+            if (response.ok && (data as LoginResponse).status) {
+                const loggedInUser = (data as LoginResponse).user;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(loggedInUser));
+                setUser(loggedInUser);
                 return true;
             }
 
@@ -42,11 +66,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const logout = () => {
         localStorage.removeItem(STORAGE_KEY);
-        setUsername(null);
+        setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated: !!username, username, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

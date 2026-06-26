@@ -4,9 +4,9 @@ export type ISODateTime = string
 
 
 export interface Profile {
-    id: UUID
-    email: string
-    first_name: string
-    last_name: string
-    roleName?: string
-  }
+  id: UUID
+  username: string
+  email: string
+  name: string
+  roleName?: string
+}

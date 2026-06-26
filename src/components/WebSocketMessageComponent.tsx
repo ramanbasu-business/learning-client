@@ -31,7 +31,7 @@ const statusMeta: Record<
 
 export default function WebSocketMessageComponent() {
     const [messageInput, setMessageInput] = useState<string>("");
-    const serverUrl = import.meta.env.VITE_SERVER_URL ?? "ws://localhost:5000";
+    const serverUrl = import.meta.env.VITE_SERVER_URL ?? "ws://localhost:5001";
     const { messages, sendMessageToSocketServer, status } = useWebSocket(`${serverUrl}/chat`)
     const messageListRef = useRef<HTMLDivElement | null>(null);
 
