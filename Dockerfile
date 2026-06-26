@@ -1,16 +1,16 @@
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
-COPY learning-client/package*.json ./
+COPY package*.json ./
 RUN npm install
 
-COPY learning-client/ .
+COPY . .
 
 RUN npm run build
 
 # Serve stage
-FROM node:20-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 

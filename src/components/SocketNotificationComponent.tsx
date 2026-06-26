@@ -4,7 +4,8 @@ import type { SocketConnectionStatus } from "@/types/socket.d";
 
 
 export default function SocketNotificationComponent() {
-    const { messages, sendMessageToSocketServer, status } = useWebSocket("ws://localhost:5000/notifications");
+    const serverUrl = import.meta.env.VITE_SERVER_URL ?? "ws://localhost:5001";
+    const { messages, sendMessageToSocketServer, status } = useWebSocket(`${serverUrl}/notifications`);
 
     useEffect(() => {
         sendMessageToSocketServer("notify");
