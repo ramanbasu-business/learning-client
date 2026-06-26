@@ -1,22 +1,9 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
-
-export interface AuthUser {
-    id: string;
-    username: string;
-    email: string;
-    name: string;
-    roles?: string[];
-}
-
-interface LoginResponse {
-    status: boolean;
-    message: string;
-    user: AuthUser;
-}
+import type { LoginSuccessResponse, UserDto } from '@/types/bff-api';
 
 interface AuthContextValue {
     isAuthenticated: boolean;
-    user: AuthUser | null;
+    user: UserDto | null;
     login: (username: string, password: string) => Promise<boolean>;
     logout: () => void;
 }
@@ -26,19 +13,19 @@ const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5001';
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-function readStoredUser(): AuthUser | null {
+function readStoredUser(): UserDto | null {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
 
     try {
-        return JSON.parse(raw) as AuthUser;
+        return JSON.parse(raw) as UserDto;
     } catch {
         return null;
     }
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-    const [user, setUser] = useState<AuthUser | null>(readStoredUser);
+    const [user, setUser] = useState<UserDto | null>(readStoredUser);
 
     const login = async (username: string, password: string) => {
         try {
@@ -50,8 +37,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
             const data = await response.json();
 
-            if (response.ok && (data as LoginResponse).status) {
-                const loggedInUser = (data as LoginResponse).user;
+            if (response.ok && (data as LoginSuccessResponse).status) {
+                const loggedInUser = (data as LoginSuccessResponse).user;
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(loggedInUser));
                 setUser(loggedInUser);
                 return true;

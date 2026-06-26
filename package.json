@@ -8,7 +8,8 @@
     "prebuild": "node -e \"require('vite')\"",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:types": "openapi-typescript ../learning-server/spec/swagger.json -o src/types/bff-api.generated.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
@@ -33,6 +34,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "openapi-typescript": "^7.13.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.12"

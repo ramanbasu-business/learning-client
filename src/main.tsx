@@ -14,8 +14,9 @@ import LoginPage from './pages/LoginPage'
 import LogOffPage from './pages/LogOffPage'
 
 // Protected pages (auth required)
-import DashBoardPage from './pages/DashBoardPage'
-import CartPage from './Tests/CartPage'
+import DashBoardPage from './pages/DashBoardPage';
+import CartPage from './pages/CartPage';
+import UsersPage from './pages/UsersPage';
 import TestListGroup from '@/Tests/TestListGroup'
 import TestAlert from './Tests/TestAlert'
 import TestButton from './Tests/TestButton'
@@ -36,6 +37,7 @@ createRoot(document.getElementById('root')!).render(
             <Route element={<AppShell><Outlet /></AppShell>}>
               {/* Main app routes */}
               <Route path="/dashboard" element={<DashBoardPage />} />
+              <Route path="/users" element={<UsersPage />} />
               <Route path="/cartpage" element={<CartPage />} />
 
               {/* Test/demo routes */}

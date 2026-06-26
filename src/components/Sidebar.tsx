@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 const navItems = [
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Cart', href: '/cartpage' },
-    { name: 'Orders', href: '/orders' },
+    { name: 'Users', href: '/users' },
     { name: 'Messages', href: '/messages' },
     { name: 'Settings', href: '/settings' },
 
